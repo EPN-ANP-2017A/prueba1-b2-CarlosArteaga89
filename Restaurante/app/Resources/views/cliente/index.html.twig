@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Lista de Clientes</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Cedula</th>
+                <th>Fechanac</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cliente in clientes %}
+            <tr>
+                <td><a href="{{ path('cliente_show', { 'id': cliente.id }) }}">{{ cliente.id }}</a></td>
+                <td>{{ cliente.nombre }}</td>
+                <td>{{ cliente.cedula }}</td>
+                <td>{% if cliente.fechaNac %}{{ cliente.fechaNac|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('cliente_show', { 'id': cliente.id }) }}">Ver</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('cliente_edit', { 'id': cliente.id }) }}">Editar</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('cliente_new') }}">Crear un nuevo cliente</a>
+        </li>
+    </ul>
+{% endblock %}
